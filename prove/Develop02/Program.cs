@@ -9,6 +9,7 @@ class Program
         string userChoice = "1";
 
         while(userChoice != "5")
+        {
             Console.WriteLine("Welcome to the Journal Program!");
             Console.WriteLine("Please select from the following menu");
             Console.WriteLine("1. New");
@@ -22,7 +23,8 @@ class Program
             switch (userChoice)
             {
                 case "1":
-                    PromptGenerator promptGenerator = new PromptGenerator
+                //new entry
+                    PromptGenerator promptGenerator = new PromptGenerator();
                     string prompt = promptGenerator.GetRandomPrompt();
                     Console.WriteLine(prompt);
                     string response = Console.ReadLine();
@@ -38,6 +40,7 @@ class Program
                     break;
 
                 case "2":
+                //display
                     foreach (Entry singleEntry in journal._entries)
                     {
                         Console.WriteLine($"{singleEntry._entryDate} {singleEntry._prompt} {singleEntry._response}");
@@ -45,14 +48,17 @@ class Program
                     break;
 
                 case "3":
-                    //save
+                //save
                     Console.WriteLine("Enter filename (format -> fileName.txt):");
-                    string _filename = Console.ReadLine();
-                    SaveFile(_filename);
+                    string filenameSave = Console.ReadLine();
+                    Journal.SaveFile(filenameSave, journal._entries);
                     break;
 
                 case "4":
-                    //load
+                //load
+                    Console.WriteLine("Enter filename (format -> fileName.txt):");
+                    string filenameLoad = Console.ReadLine();
+                    Journal.LoadFromFile(filenameLoad);
                     break;
 
                 
@@ -62,5 +68,6 @@ class Program
 
 
             }
+}
 }
 }
