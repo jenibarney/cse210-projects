@@ -24,23 +24,24 @@ class Program
             {
                 case "1":
                 //new entry
+                    // supplying prompt and collecting response
                     PromptGenerator promptGenerator = new PromptGenerator();
                     string prompt = promptGenerator.GetRandomPrompt();
                     Console.WriteLine(prompt);
                     string response = Console.ReadLine();
                     
-                    // entry
+                    // linking prompt, response, and date into one entry
                     Entry entry = new Entry();
                     entry._prompt = prompt;
                     entry._response = response;
                     entry._entryDate = DateTime.Now;
 
-                    // journal
+                    // adding entry to journal
                     journal._entries.Add(entry);
                     break;
 
                 case "2":
-                //display
+                // display
                     foreach (Entry singleEntry in journal._entries)
                     {
                         Console.WriteLine($"{singleEntry._entryDate} {singleEntry._prompt} {singleEntry._response}");
@@ -48,16 +49,20 @@ class Program
                     break;
 
                 case "3":
-                //save
+                // save
+                    // prompting for filename and storing it as a string
                     Console.WriteLine("Enter filename (format -> fileName.txt):");
                     string filenameSave = Console.ReadLine();
+                    // using filename and function from Journal class to save to file
                     Journal.SaveFile(filenameSave, journal._entries);
                     break;
 
                 case "4":
-                //load
+                // load
+                    // prompting for filename and storing it as a string
                     Console.WriteLine("Enter filename (format -> fileName.txt):");
                     string filenameLoad = Console.ReadLine();
+                    // using filename and function from Journal class to load lines from a file into the Entry list
                     Journal.LoadFromFile(filenameLoad);
                     break;
 
